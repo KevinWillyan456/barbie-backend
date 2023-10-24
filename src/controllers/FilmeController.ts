@@ -6,7 +6,7 @@ import Filme from "../models/Filme";
 async function indexFilme(req: Request, res: Response) {
     try {
         const filmes = await Filme.find()
-            .sort({ title: 1 })
+            .sort({ titulo: 1 })
             .collation({ locale: "pt", strength: 2 });
         return res.status(200).json({ filmes });
     } catch (err) {
@@ -29,17 +29,18 @@ async function indexFilmeById(
 }
 
 async function storeFilme(req: Request, res: Response) {
-    const { titulo, descricao, foto } = req.body;
+    const { titulo, sinopse, foto, anoLancamento } = req.body;
 
-    if (!titulo || !descricao || !foto) {
+    if (!titulo || !sinopse || !foto || !anoLancamento) {
         return res.status(400).json({ error: "data is missing" });
     }
 
     const filme = new Filme({
         _id: uuid(),
         titulo,
-        descricao,
+        sinopse,
         foto,
+        anoLancamento,
     });
 
     try {
@@ -57,10 +58,10 @@ async function updateFilme(
     req: Request<{ id?: UpdateWithAggregationPipeline }>,
     res: Response
 ) {
-    const { titulo, descricao, foto } = req.body;
+    const { titulo, sinopse, foto, anoLancamento } = req.body;
     const { id } = req.params;
 
-    if (!titulo && !descricao && !foto) {
+    if (!titulo && !sinopse && !foto && !anoLancamento) {
         return res.status(400).json({ error: "You must enter a new data" });
     }
 
@@ -68,8 +69,9 @@ async function updateFilme(
     const updateDoc = {
         $set: {
             titulo,
-            descricao,
+            sinopse,
             foto,
+            anoLancamento,
         },
     };
 

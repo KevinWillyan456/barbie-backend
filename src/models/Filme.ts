@@ -7,6 +7,7 @@ export interface FilmeDoc extends Document {
     dataCriacao: Date;
     foto: string;
     anoLancamento: number;
+    trailer: string;
 }
 
 const filmeSchema = new Schema<FilmeDoc>({
@@ -16,6 +17,7 @@ const filmeSchema = new Schema<FilmeDoc>({
     dataCriacao: { type: Date, default: Date.now },
     foto: { type: String, required: true },
     anoLancamento: { type: Number, required: true },
+    trailer: { type: String, default: null },
 });
 
 export default model<FilmeDoc>("Filme", filmeSchema);

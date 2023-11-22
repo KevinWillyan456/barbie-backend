@@ -1,6 +1,6 @@
-import { Schema, model, Document } from "mongoose";
+import { Schema, model } from "mongoose";
 
-export interface FilmeDoc extends Document {
+export interface FilmeDoc {
     _id: string;
     titulo: string;
     sinopse: string;

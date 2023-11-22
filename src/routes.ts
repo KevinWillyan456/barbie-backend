@@ -5,7 +5,7 @@ import {
     indexFilmeById,
     storeFilme,
     updateFilme,
-} from "./controllers/FilmeController";
+} from "./app/FilmeController";
 
 export const routes = express.Router();
 
